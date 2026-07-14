@@ -35,6 +35,12 @@ function App() {
   const [mcResult, setMcResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
 
   const runAnalysis = async () => {
     setLoading(true);
@@ -120,9 +126,14 @@ function App() {
           <h1>Portfolio Risk Analytics</h1>
           <p className="hero-copy">Explore holdings, allocation mix, risk metrics, and Monte Carlo stress outcomes from your local cache.</p>
         </div>
-        <button className="primary-btn" onClick={runAnalysis}>
-          {loading ? 'Analyzing…' : 'Run analysis'}
-        </button>
+        <div className="hero-actions">
+          <button className="primary-btn" onClick={runAnalysis}>
+            {loading ? 'Analyzing…' : 'Run analysis'}
+          </button>
+          <button className="toggle-btn" onClick={() => setDarkMode((d) => !d)}>
+            {darkMode ? 'Light mode' : 'Dark mode'}
+          </button>
+        </div>
       </div>
 
       {error ? <div className="error-banner">{error}</div> : null}
@@ -265,7 +276,7 @@ function App() {
             <div className="chart-card wide">
               <ResponsiveContainer width="100%" height={320}>
                 <LineChart data={chartData}>
-                  <CartesianGrid stroke="#e2e8f0" strokeDasharray="3 3" />
+                  <CartesianGrid stroke={darkMode ? '#334155' : '#e2e8f0'} strokeDasharray="3 3" />
                   <XAxis dataKey="day" />
                   <YAxis />
                   <Tooltip />
