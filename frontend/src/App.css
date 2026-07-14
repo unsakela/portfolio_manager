@@ -300,6 +300,45 @@ input {
   margin-top: 0;
 }
 
+.panel h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--inner-card-border);
+  margin: 18px 0 14px;
+}
+
+.ma-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr auto;
+  gap: 10px;
+}
+
+.field-hint {
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.weight-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.weight-pill {
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+}
+
 @media (max-width: 900px) {
   .control-grid,
   .stats-grid,
@@ -316,7 +355,8 @@ input {
     align-items: flex-start;
   }
 
-  .holding-row {
+  .holding-row,
+  .ma-row {
     grid-template-columns: 1fr;
   }
 }
